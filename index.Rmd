@@ -1,0 +1,69 @@
+---
+title       : Oman Education Statistics
+subtitle    : DDP Course Project
+author      : Fadhila AlFaraj
+job         : 
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : []            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+---
+
+## About the Project
+
+This Project is to create a shiny application using Rstudio. The Data is for Oman Education statistics for Basic and General Education between 2002 until 2015. It provides an easy way to get statistics for the user across regions.
+
+To visit the application, see [Oman Education Statistics App](https://fadhila.shinyapps.io/oman_basic_vs_general_education_statistics/). 
+
+---
+
+## About the App  
+
+The variables provided are;  
+
+1. No. of Classes  
+2. No. of Students  
+3. No. of Schools  
+4. No. of Teachers  
+
+
+For each of the 11 regions, the user can select the desired output to get three graphs for;   
+
+- Total Basic Vs General  
+- Gender Based graphs segregated between Basic and General Education systems   
+
+---
+
+## Sample plot  
+   
+
+  
+```{r ,cache=FALSE, eruptions, warning=FALSE, message=FALSE, echo=FALSE}
+
+library(ggplot2)
+
+df <- read.csv("Data.csv", stringsAsFactors = FALSE) 
+df$Year <- as.Date(ISOdate(df$Year,12,31))
+
+k <- subset(df ,df$Region=="Muscat")
+d1 <- subset(k ,k$Indicator == "No. of Teachers")
+ 
+p <- ggplot(d1, aes(d1$Year)) +geom_line(aes(y=d1$Total.Basic.Education, color="orange")) +  geom_line(aes(y=d1$Total.General.Education, color="blue")) + labs(x= "Date", y = "No. of Teachers") + ggtitle("Total No. of Teachers for Basic Vs. General\n Education in Muscat Region") + theme(plot.title = element_text(size = 14, vjust=2, lineheight=0.8, hjust = 0.5), legend.title = element_blank(), legend.position = "bottom") + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),panel.background = element_blank(), axis.line = element_line(colour = "black")) +  scale_color_manual(labels = c("Total.Basic.Education", "Total.General.Education"), values = c("orange","blue"))
+
+ print(p)
+```    
+  
+Here is a sample plot for Muscat Region Total No. of Teachers  for Basic & General Education;   
+  
+---
+
+---
+  
+   
+## Additional Features  
+
+The Application also provides ratios for No. of students per teacher and class. This is an important figure to understand the load in each school and how it affects the understanding of the students.  
+
+ 
