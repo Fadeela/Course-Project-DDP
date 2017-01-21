@@ -40,7 +40,7 @@ For each of the 11 regions, the user can select the desired output to get three 
    
 
   
-![plot of chunk eruptions](figure/eruptions-1.png)
+![plot of chunk eruptions](assets/fig/eruptions-1.png)
   
 Here is a sample plot for Muscat Region Total No. of Teachers  for Basic & General Education;   
   
